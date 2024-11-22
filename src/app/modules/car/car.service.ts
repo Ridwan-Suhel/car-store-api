@@ -6,9 +6,28 @@ const createCarIntoDB = async (car: ICar) => {
     return result;
 }
 
-const getAllCarsFromDB = async () => {
-    const result = await CarModel.find();
-    return result;
+// const getAllCarsFromDB = async () => {
+//     const result = await CarModel.find();
+//     return result;
+// }
+
+const getAllCarsFromDB = async (searchTerm?: string) => {
+    if (searchTerm) {
+        // Create a case-insensitive regex for the search term
+        const regex = new RegExp(searchTerm, "i");
+
+        // Filter cars by search term across brand, model, and category
+        return await CarModel.find({
+            $or: [
+                { brand: regex },
+                { model: regex },
+                { category: regex },
+            ],
+        });
+    }
+
+    // If no search term is provided, return all cars
+    return await CarModel.find();
 }
 
 const getSingleCarFromDB = async (id: string) => {
@@ -16,7 +35,11 @@ const getSingleCarFromDB = async (id: string) => {
     return result
 }
 
-const updateSingleCarIntoDB = async (id: string, payload: ICar) => {
+interface IUpdatePayload{
+    price: number,
+    quantity: number
+} 
+const updateSingleCarIntoDB = async (id: string, payload: IUpdatePayload) => {
     const result = await CarModel.findByIdAndUpdate(
         id,
         payload,

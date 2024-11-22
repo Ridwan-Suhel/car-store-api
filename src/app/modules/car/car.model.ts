@@ -20,6 +20,16 @@ const carSchema = new Schema<ICar>(
   }
 );
 
+
+// middlewear for finding only available stock datas 
+carSchema.pre('find', function(next) {
+  this.find({inStock: {$ne: false}})
+  next();
+})
+carSchema.pre('findOne', function(next) {
+  this.find({inStock: {$ne: false}})
+  next();
+})
 export const CarModel = model<ICar>('Car', carSchema);
 
 
