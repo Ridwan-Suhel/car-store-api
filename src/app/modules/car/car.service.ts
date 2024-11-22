@@ -11,7 +11,31 @@ const getAllCarsFromDB = async () => {
     return result;
 }
 
+const getSingleCarFromDB = async (id: string) => {
+    const result = await CarModel.findById(id);
+    return result
+}
+
+const updateSingleCarIntoDB = async (id: string, payload: ICar) => {
+    const result = await CarModel.findByIdAndUpdate(
+        id,
+        payload,
+        {
+            new: true
+        }
+    );
+    return result;
+}
+
+const deleteSingleCarFromDB = async (id: string) => {
+    const result = await CarModel.findByIdAndDelete(id);
+    return result;
+}
+
 export const CarServices = {
     createCarIntoDB,
-    getAllCarsFromDB
+    getAllCarsFromDB,
+    getSingleCarFromDB,
+    updateSingleCarIntoDB,
+    deleteSingleCarFromDB
 }

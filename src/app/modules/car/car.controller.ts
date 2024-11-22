@@ -37,7 +37,63 @@ const getAllCars = async (req: Request, res: Response) => {
         console.log(err)
     }
 }
+
+const getSingleCar = async (req: Request, res: Response) => {
+    try{
+        const {carId} = req.params; 
+        const result = await CarServices.getSingleCarFromDB(carId);
+
+        res.status(200).json({
+            status: true,
+            message: "Car retrieved successfully",
+            data: result
+        });
+
+    }
+    catch(err){
+        console.log(err)
+    }
+}
+
+const updateSingleCar = async (req: Request, res: Response) => {
+    try{
+        const {carId} = req.params; 
+        const payload = req.body; 
+        const result = await CarServices.updateSingleCarIntoDB(carId, payload);
+
+        res.status(200).json({
+            status: true,
+            message: "Car updated successfully",
+            data: result
+        });
+
+    }
+    catch(err){
+        console.log(err)
+    }
+}
+
+const deleteSingleCar = async (req: Request, res: Response) => {
+    try{
+        const {carId} = req.params; 
+        const result = await CarServices.deleteSingleCarFromDB(carId);
+
+        res.status(200).json({
+            status: true,
+            message: "Car deleted successfully",
+            data: {}
+        });
+
+    }
+    catch(err){
+        console.log(err)
+    }
+}
+
 export const CarControllers = {
     createCar,
-    getAllCars
+    getAllCars,
+    getSingleCar,
+    updateSingleCar,
+    deleteSingleCar
 }
