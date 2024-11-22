@@ -1,4 +1,4 @@
-import { Schema, model, connect } from 'mongoose';
+import { Schema, model } from 'mongoose';
 import { ICar } from './car.interface';
 
 const carSchema = new Schema<ICar>(
@@ -7,7 +7,10 @@ const carSchema = new Schema<ICar>(
     model: { type: String},
     year: {type: Number},
     price: {type: Number, required: true},
-    category: ["Sedan", "SUV" , "Truck" , "Coupe" , "Convertible"],
+    category: {
+      type: String,
+      enum: ["Sedan", "SUV" , "Truck" , "Coupe" , "Convertible"]
+    },
     description: { type: String },
     quantity: { type: Number, required: true},
     inStock: {type: Boolean},

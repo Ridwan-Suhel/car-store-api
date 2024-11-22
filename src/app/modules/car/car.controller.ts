@@ -34,7 +34,11 @@ const getAllCars = async (req: Request, res: Response) => {
 
     }
     catch(err){
-        console.log(err)
+        res.status(200).json({
+            status: false,
+            message: "Something went wrong",
+            error: err
+        });
     }
 }
 
@@ -51,7 +55,11 @@ const getSingleCar = async (req: Request, res: Response) => {
 
     }
     catch(err){
-        console.log(err)
+        res.status(200).json({
+            status: false,
+            message: "Something went wrong",
+            error: err
+        });
     }
 }
 
@@ -69,14 +77,18 @@ const updateSingleCar = async (req: Request, res: Response) => {
 
     }
     catch(err){
-        console.log(err)
+        res.status(200).json({
+            status: false,
+            message: "Something went wrong",
+            error: err
+        });
     }
 }
 
 const deleteSingleCar = async (req: Request, res: Response) => {
     try{
         const {carId} = req.params; 
-        const result = await CarServices.deleteSingleCarFromDB(carId);
+        await CarServices.deleteSingleCarFromDB(carId);
 
         res.status(200).json({
             status: true,
@@ -86,7 +98,11 @@ const deleteSingleCar = async (req: Request, res: Response) => {
 
     }
     catch(err){
-        console.log(err)
+        res.status(200).json({
+            status: false,
+            message: "Something went wrong",
+            error: err
+        });
     }
 }
 
