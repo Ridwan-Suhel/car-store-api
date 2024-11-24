@@ -1,22 +1,19 @@
 import { ICar } from "./car.interface";
 import { CarModel } from "./car.model";
 
+// creating service function here 
 const createCarIntoDB = async (car: ICar) => {
     const result = await CarModel.create(car);
     return result;
 }
 
-// const getAllCarsFromDB = async () => {
-//     const result = await CarModel.find();
-//     return result;
-// }
-
+// creating service function for all cars and search term 
 const getAllCarsFromDB = async (searchTerm?: string) => {
     if (searchTerm) {
-        // Create a case-insensitive regex for the search term
+        // Creating a case-insensitive regex for the search term
         const regex = new RegExp(searchTerm, "i");
 
-        // Filter cars by search term across brand, model, and category
+        // Filter and return cars by search term  (expecting: brand, model, and category)
         return await CarModel.find({
             $or: [
                 { brand: regex },
@@ -30,15 +27,19 @@ const getAllCarsFromDB = async (searchTerm?: string) => {
     return await CarModel.find();
 }
 
+// creating service function for single car
 const getSingleCarFromDB = async (id: string) => {
     const result = await CarModel.findById(id);
     return result
 }
 
+// creting interface for update payload 
 interface IUpdatePayload{
     price: number,
     quantity: number
 } 
+
+// creating service function for update single car 
 const updateSingleCarIntoDB = async (id: string, payload: IUpdatePayload) => {
     const result = await CarModel.findByIdAndUpdate(
         id,
@@ -50,11 +51,13 @@ const updateSingleCarIntoDB = async (id: string, payload: IUpdatePayload) => {
     return result;
 }
 
+// creating delete car service function 
 const deleteSingleCarFromDB = async (id: string) => {
     const result = await CarModel.findByIdAndDelete(id);
     return result;
 }
 
+// exporting all services here 
 export const CarServices = {
     createCarIntoDB,
     getAllCarsFromDB,

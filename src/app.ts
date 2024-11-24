@@ -8,9 +8,12 @@ const app: Application = express();
 app.use(express.json());
 
 app.use(cors());
+
+// routes related to car 
 app.use('/api', CarRoutes);
 app.use('/api', CarOrderRoutes);
 
+// root routes for for Car store app api
 app.get('/', (req: Request, res: Response) => {
   res.send(
     {

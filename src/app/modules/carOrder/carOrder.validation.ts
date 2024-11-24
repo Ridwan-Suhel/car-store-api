@@ -1,5 +1,6 @@
 import { z } from "zod";
 
+// validating car order by the help of zod validation 
 const CarOrderValidationSchema = z.object({
     email: z.string().email({ message: "Invalid email address" }),
     car: z.string().min(1, {message: "Invalid car id" }),

@@ -1,5 +1,6 @@
 import { z } from "zod";
 
+// validating car model with zod validatior  
 const CarValidationSchema = z.object({
     brand: z.string().min(1, { message: "Brand is required" }),
     model: z.string().min(1, { message: "Model is required" }),

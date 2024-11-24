@@ -1,4 +1,4 @@
-
+// creating type/interface for car 
 export interface ICar {
     brand: string;
     model: string;

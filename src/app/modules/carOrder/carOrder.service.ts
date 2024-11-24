@@ -1,13 +1,15 @@
 import { ICarOrder } from "./carOrder.interface"
 import { CarOrderModel } from "./carOrder.model"
 
+// creating service function for car order 
 const createCarOrderIntoDB = async (carOrder: ICarOrder) => {
     const result = await CarOrderModel.create(carOrder);
     return result
 }
 
+// creting total revenue service from here 
 const getTotalRevenueFromDB = async () => {
-    // const result = await CarOrderModel.find();
+  // calculating car order revenue by the help of aggregation method 
     const result = await CarOrderModel.aggregate([
         {
           $group: {
@@ -24,10 +26,11 @@ const getTotalRevenueFromDB = async () => {
       ]);
 
     const totalRevenue = result[0]?.totalRevenue || 0;
+    // returning calculated data 
     return totalRevenue
 }
 
-
+// exporting all carorder services 
 export const CarOrderServices = {
     createCarOrderIntoDB,
     getTotalRevenueFromDB
