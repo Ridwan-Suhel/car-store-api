@@ -1,6 +1,6 @@
 # Car Store App
 
-Welcome to my Car store app a robust, scalable and feature-rich API for managing car order management, checking and monitoring car store stock and more. built with node.js, express.js, mongodb. It will help you to take customer order processing get immidiate error response on client if any occured by client side and many more.
+Welcome to my Car store app a robust, scalable and feature-rich API for managing car order management, checking and monitoring car store stock and more. built with node.js, express.js, mongoose, typescript. It will help you to take customer order processing get immidiate error response on client if any occured by client side and many more.
 
 ## Features 
 
