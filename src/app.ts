@@ -4,19 +4,21 @@ import { CarRoutes } from './app/modules/car/car.route';
 import { CarOrderRoutes } from './app/modules/carOrder/carOrder.route';
 import { AppError } from './app/shared/appError';
 import { UserRoutes } from './app/modules/user/user.route';
+import { AuthRoutes } from './app/modules/Auth/auth.routes';
 const app: Application = express();
 
 // parser
 app.use(express.json());
 
-app.use(cors());
+app.use(cors({origin: 'http://localhost:5173'}));
 
 //routes related to auths
-app.use('/api', UserRoutes)
+app.use('/api/v1', UserRoutes)
+app.use('/api/v1', AuthRoutes)
 
 // routes related to car 
-app.use('/api', CarRoutes);
-app.use('/api', CarOrderRoutes);
+app.use('/api/v1', CarRoutes);
+app.use('/api/v1', CarOrderRoutes);
 
 
 // root routes for for Car store app api
