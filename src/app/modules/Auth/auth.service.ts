@@ -15,10 +15,10 @@ const LoginUser = async (payload: TLoginUser) => {
     }
 
     //checking is user blocked
-    // const isBlocked = isUserExist?.isBlocked;
-    // if(isBlocked){
-    //     throw new AppError(403, 'User is blocked');
-    // }
+    const isBlocked = isUserExist?.isBlocked;
+    if(isBlocked){
+        throw new AppError(403, 'User is blocked');
+    }
 
     //checking is password matched
     const isPasswordMatched = await bcrypt.compare(payload?.password, isUserExist?.password);
