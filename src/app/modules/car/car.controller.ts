@@ -70,9 +70,19 @@ const createCar = async (req: Request, res: Response) => {
 const getAllCars = async (req: Request, res: Response) => {
   try {
     // geting search term from query (expected: category/model/brand)
-    const { searchTerm } = req.query;
-    // service function calling for get all cars and searchterm if have any query 
-    const result = await CarServices.getAllCarsFromDB(searchTerm as string);
+    const { searchTerm, category, availability, minPrice, maxPrice, model, brand} = req.query;
+    console.log("searchTerm:", searchTerm);
+
+    console.log(availability)
+    const result = await CarServices.getAllCarsFromDB({
+      searchTerm: searchTerm || "",
+      category,
+      availability,
+      minPrice,
+      maxPrice,
+      model,
+      brand
+    });
 
     // sending success response to the client 
     res.status(200).json({

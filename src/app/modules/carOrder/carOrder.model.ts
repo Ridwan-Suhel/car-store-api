@@ -6,11 +6,30 @@ import { CarServices } from '../car/car.service';
 // creating scheam / model for car order with interface
 const carOrderSchema = new Schema<ICarOrder>({
     email: { type: String, required: true },
+    user: { 
+        type: Schema.Types.ObjectId, 
+        ref: "User", 
+        required: true 
+      },
     car: { 
-        type: String,
+        type: Schema.Types.ObjectId,
         ref: "Car",
         required: true 
     },
+    status: {
+        type: String,
+        enum: ["Pending", "Paid", "Shipped", "Completed", "Cancelled"],
+        default: "Pending",
+      },
+      transaction: {
+        id: String,
+        transactionStatus: String,
+        bank_status: String,
+        sp_code: String,
+        sp_message: String,
+        method: String,
+        date_time: String,
+      },
     quantity: { type: Number, required: true },
     totalPrice : { type: Number, required: true },
   },
@@ -23,7 +42,7 @@ const carOrderSchema = new Schema<ICarOrder>({
 //creating pre middlewear for check the quantity available or not in DB
 carOrderSchema.pre('save', async function (next) {
     // checking is cuurent id availeble in my db or not that wanted to order a user
-    const id = this.car;
+    const id = this.car.toString();
     const result = await CarModel.findById(id);
 
     if(result){

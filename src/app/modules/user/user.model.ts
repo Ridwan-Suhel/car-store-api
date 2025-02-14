@@ -10,6 +10,9 @@ const userSchema = new Schema <IUser>(
         password: { type: String, required: true},
         role: { type: String, enum: ["admin", "user"], default: "user" },
         isBlocked: { type: Boolean, default: false },
+        phone: { type: String, default: "N/A" },
+        address: { type: String, default: "N/A" },
+        city: { type: String, default: "N/A" },
       }, {
         timestamps: true,
       }
