@@ -10,6 +10,6 @@ export interface ICar {
     price: number;
     category: "Sedan" | "SUV" | "Hatchback" | "Electric SUV" | "Truck" | "Coupe" | "Convertible";
     description: string;
-    inStock: boolean;
+    inStock?: boolean;
     quantity: number;
   }

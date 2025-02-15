@@ -3,8 +3,8 @@ import { z } from "zod";
 // validating car model with zod validatior  
 const CarValidationSchema = z.object({
     name: z.string().min(1, { message: "Name is required" }),
-    isOnSale: z.boolean(),
-    featured: z.boolean(),
+    isOnSale: z.boolean().optional(),
+    featured: z.boolean().optional(),
     image: z.string().optional(),
     brand: z.string().min(1, { message: "Brand is required" }),
     model: z.string().min(1, { message: "Model is required" }),
@@ -22,7 +22,7 @@ const CarValidationSchema = z.object({
     quantity: z.number()
     .int({ message: "Quantity must be an integer" }) 
     .min(0, { message: "Quantity must be at least 0" }),
-    inStock: z.boolean(),
+    inStock: z.boolean().optional(),
 });
 
 export default CarValidationSchema

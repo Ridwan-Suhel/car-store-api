@@ -162,10 +162,62 @@ const getTotalRevenue = async (req: Request, res: Response) => {
     }
 }
 
+// delete single order 
+const deleteSingleOrder = async (req: Request, res: Response) => {
+  try {
+    // taking car id from req paramas
+    const { orderId } = req.params;
+    // calling service function for delete single car
+    await CarOrderServices.deleteSingleOrderFromDB(orderId);
+
+    // sending success response to the client 
+    res.status(200).json({
+      status: true,
+      message: 'Order deleted successfully',
+      data: {},
+    });
+  } catch (err) {
+    // sending default err 
+    res.status(200).json({
+      status: false,
+      message: 'Something went wrong',
+      error: err,
+    });
+  }
+};
+
+// update single order controller start from here 
+const updateSingleOrder = async (req: Request, res: Response) => {
+  try {
+    // taking car id from req paramas 
+    const { orderId } = req.params;
+    // storing payload data from body request 
+    const payload = req.body;
+    // calling service function update single car 
+    const result = await CarOrderServices.updateSingleOrderIntoDB(orderId, payload);
+
+    //sending success response to the client 
+    res.status(200).json({
+      status: true,
+      message: 'Order updated successfully',
+      data: result,
+    });
+  } catch (err) {
+    // sending error response to the client 
+    res.status(200).json({
+      status: false,
+      message: 'Something went wrong',
+      error: err,
+    });
+  }
+};
+
 // exporting all carorder controller from here 
 export const CarOrderControllers = {
     createCarOrder,
     verifyPayment,
     getTotalRevenue,
-    getOrders
+    getOrders,
+    deleteSingleOrder,
+    updateSingleOrder
 } 

@@ -26,6 +26,14 @@ const userSchema = new Schema <IUser>(
     next();
   })
 
+  // userSchema.pre('save', async function (next) {
+  //   if (!this.isModified('password')) {
+  //     return next(); // Only hash if the password is modified
+  //   }
+  //   this.password = await bcrypt.hash(this.password, Number(config.bcrypt_salt_round));
+  //   next();
+  // });
+
   // implementing empty string as a password for not showing from view end 
   userSchema.post('save', async function (doc, next) {
     doc.password = '';

@@ -71,9 +71,9 @@ const getAllCars = async (req: Request, res: Response) => {
   try {
     // geting search term from query (expected: category/model/brand)
     const { searchTerm, category, availability, minPrice, maxPrice, model, brand} = req.query;
-    console.log("searchTerm:", searchTerm);
+    // console.log("searchTerm:", searchTerm);
 
-    console.log(availability)
+    // console.log(availability)
     const result = await CarServices.getAllCarsFromDB({
       searchTerm: searchTerm || "",
       category,

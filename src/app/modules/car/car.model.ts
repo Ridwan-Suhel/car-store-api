@@ -19,7 +19,7 @@ const carSchema = new Schema<ICar>(
     },
     description: { type: String },
     quantity: { type: Number, required: true},
-    inStock: {type: Boolean},
+    inStock: {type: Boolean, default: true},
   },
   {
     timestamps: true

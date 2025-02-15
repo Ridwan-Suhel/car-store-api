@@ -4,9 +4,9 @@ export interface IUser{
     name: string,
     email: string,
     password: string,
-    phone: string,
-    address: string,
-    city: string,
+    phone?: string,
+    address?: string,
+    city?: string,
     role?: 'admin' | 'user',
     isBlocked?: boolean
 }

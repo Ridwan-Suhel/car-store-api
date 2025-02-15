@@ -30,7 +30,7 @@ const createCarIntoDB = async (car: ICar) => {
 // }
 
 const getAllCarsFromDB = async (queryParams: any) => { 
-    console.log("queryParams:", queryParams);
+    // console.log("queryParams:", queryParams);
   
     if (queryParams) {
       const { searchTerm, category, availability, minPrice, maxPrice, model, brand } = queryParams;
@@ -38,6 +38,7 @@ const getAllCarsFromDB = async (queryParams: any) => {
       const filter: any = {};
   
       // If a search term exists, apply regex filtering
+      // console.log(searchTerm)
       if (searchTerm) {
         const regex = new RegExp(searchTerm, "i");
         filter.$or = [{ brand: regex }, { model: regex }, { category: regex }];
@@ -69,11 +70,11 @@ const getAllCarsFromDB = async (queryParams: any) => {
         }
       }
   
-      console.log('Filter=:', filter);
+      // console.log('Filter=:', filter);
       const cars = await CarModel.find(filter);
       return cars;
     } else {
-        console.log('am i calling')
+        // console.log('am i calling')
       const cars = await CarModel.find();
       return cars;
     }

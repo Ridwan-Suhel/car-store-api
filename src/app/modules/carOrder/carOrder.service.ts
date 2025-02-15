@@ -30,7 +30,7 @@ const createCarOrderIntoDB = async (carOrder: ICarOrder) => {
           };
     
           const payment = await orderUtils.makePaymentAsync(shurjopayPayload);
-          console.log(payment)
+          // console.log(payment)
     
           if (payment?.transactionStatus || payment?.transactionStatus == 'Initiated') {
             await CarOrderModel.updateOne(
@@ -122,15 +122,50 @@ const getTotalRevenueFromDB = async () => {
     return totalRevenue
 }
 
+// const getOrders = async () => {
+//   const data = await CarOrderModel.find();
+//   return data;
+// };
+
 const getOrders = async () => {
-  const data = await CarOrderModel.find();
+  const data = await CarOrderModel.find()
+    .populate('user') 
+    .populate('car');
+  
   return data;
 };
 
+// creating delete order service function 
+const deleteSingleOrderFromDB = async (id: string) => {
+    const result = await CarOrderModel.findByIdAndDelete(id);
+    return result;
+}
+
+// creating service function for update single order 
+const updateSingleOrderIntoDB = async (id: string, payload: ICarOrder) => {
+  // console.log(payload);
+  // const carOrderData = {
+  //         ...parseValidateData,
+  //         user: new mongoose.Types.ObjectId(parseValidateData.user),
+  //         car: new mongoose.Types.ObjectId(parseValidateData.car),
+  //     };
+
+    const result = await CarOrderModel.findByIdAndUpdate(
+        id,
+        payload,
+        {
+            new: true
+        }
+    );
+    // console.log(result)
+    return result;
+}
 // exporting all carorder services 
 export const CarOrderServices = {
     createCarOrderIntoDB,
     getTotalRevenueFromDB,
     verifyPayment,
-    getOrders
+    getOrders,
+    deleteSingleOrderFromDB,
+    updateSingleOrderIntoDB
 }
