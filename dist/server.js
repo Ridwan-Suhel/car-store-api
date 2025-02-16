@@ -26,7 +26,7 @@ function main() {
         }
         catch (err) {
             // eslint-disable-next-line no-console
-            console.log(err, 'Hi');
+            console.log(err, 'Something went wrong from server file');
         }
     });
 }
