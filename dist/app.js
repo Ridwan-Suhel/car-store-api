@@ -12,7 +12,7 @@ const auth_routes_1 = require("./app/modules/Auth/auth.routes");
 const app = (0, express_1.default)();
 // parser
 app.use(express_1.default.json());
-app.use((0, cors_1.default)({ origin: 'http://localhost:5173' }));
+app.use((0, cors_1.default)({ origin: 'https://carnest-ashy.vercel.app' }));
 //routes related to auths
 app.use('/api/v1', user_route_1.UserRoutes);
 app.use('/api/v1', auth_routes_1.AuthRoutes);
