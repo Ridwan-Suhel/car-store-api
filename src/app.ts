@@ -10,8 +10,9 @@ const app: Application = express();
 // parser
 app.use(express.json());
 
-app.use(cors({origin: 'https://carnest-ashy.vercel.app'}));
-
+app.use(cors({
+  origin: ['https://carnest-ashy.vercel.app', 'http://localhost:5173']
+}));
 //routes related to auths
 app.use('/api/v1', UserRoutes)
 app.use('/api/v1', AuthRoutes)
